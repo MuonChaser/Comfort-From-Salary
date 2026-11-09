@@ -1,8 +1,8 @@
 name: macOS desktop
 
 on:
-  pull_request:
-  workflow_dispatch:
+  push:
+    branches: [codex/macos-verification]
 
 permissions:
   contents: read
