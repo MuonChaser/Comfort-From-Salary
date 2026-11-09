@@ -4,6 +4,11 @@
 }
 .pet-wrap.has-yueya .pet-art{display:none}
 .pet-wrap.has-yueya .pet-character{border-radius:0}
+.pet-wrap:not(.dragging, .show-menu, [data-tooltip-dismissed]):is(.hovering, .show-tooltip, :has(> .pet-character:focus-visible)) .pet-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
 .prototype-footer{flex-wrap:wrap}
 .prototype-footer span:first-child{white-space:normal;flex-wrap:wrap}
 .prototype-footer a{color:#7e926b;text-decoration:none;border-bottom:1px solid #b9c7ac}

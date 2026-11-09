@@ -161,6 +161,10 @@
     view = next;
     $('app-window').hidden = next !== 'window';
     $('pet-wrap').hidden = next !== 'pet';
+    if (next !== 'pet') {
+      $('pet-wrap').classList.remove('hovering', 'show-tooltip');
+      delete $('pet-wrap').dataset.tooltipDismissed;
+    }
     $('desktop-hint').hidden = next !== 'pet';
     $('empty-state').hidden = next !== 'hidden' && next !== 'exited';
     $('relaunch').hidden = next !== 'exited';
@@ -319,6 +323,7 @@
     }
   }
   function openMenu(x, y) {
+    dismissPetTooltip();
     if (desktopPet) {
       desktop.menu($('pet-wrap').dataset.state);
       return;
@@ -335,6 +340,16 @@
     $('context-menu').hidden = true;
     $('pet-wrap').classList.remove('show-menu');
     if (focus && wasOpen && view === 'pet') $('pet-character').focus({ preventScroll: true });
+  }
+  function setPetHover(hovering) {
+    const pet = $('pet-wrap');
+    pet.classList.toggle('hovering', hovering);
+    if (hovering && !pet.classList.contains('dragging')) delete pet.dataset.tooltipDismissed;
+  }
+  function dismissPetTooltip() {
+    const pet = $('pet-wrap');
+    pet.classList.remove('show-tooltip');
+    pet.dataset.tooltipDismissed = 'true';
   }
   function clampPet() {
     if (desktop) return;
@@ -370,6 +385,7 @@
       if (!drag) return;
       const dx = event.clientX - drag.x, dy = event.clientY - drag.y;
       if (Math.abs(dx) + Math.abs(dy) < 4 && !drag.moved) return;
+      if (kind === 'pet' && !drag.moved) dismissPetTooltip();
       if (desktopPet) {
         drag.moved = true;
         target.classList.add('dragging');
@@ -438,7 +454,23 @@
   });
   $('preview-state').addEventListener('change', event => { chooseDemo(event.target.value); render(); clampPet(); });
   $('pet-character').addEventListener('dblclick', () => { if ($('pet-wrap').dataset.justDragged) return; act('overview'); });
-  $('pet-character').addEventListener('click', () => { if (!$('pet-wrap').dataset.justDragged) $('pet-wrap').classList.toggle('show-tooltip'); });
+  $('pet-character').addEventListener('click', event => {
+    const pet = $('pet-wrap');
+    if (event.pointerType !== 'touch' || pet.dataset.justDragged) return;
+    delete pet.dataset.tooltipDismissed;
+    pet.classList.toggle('show-tooltip');
+  });
+  $('pet-character').addEventListener('focus', event => {
+    if (event.currentTarget.matches(':focus-visible')) delete $('pet-wrap').dataset.tooltipDismissed;
+  });
+  if (!desktopPet) {
+    $('pet-character').addEventListener('pointerenter', event => {
+      if (event.pointerType !== 'touch') setPetHover(true);
+    });
+    $('pet-character').addEventListener('pointerleave', event => {
+      if (event.pointerType !== 'touch') setPetHover(false);
+    });
+  }
   $('pet-character').addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); act('overview'); } if (event.key === 'ContextMenu' || event.shiftKey && event.key === 'F10') { event.preventDefault(); const r = $('pet-wrap').getBoundingClientRect(); openMenu(r.right, r.top); } });
   $('pet-character').addEventListener('contextmenu', event => { event.preventDefault(); openMenu(event.clientX, event.clientY); });
   $('tray-app').addEventListener('contextmenu', event => { event.preventDefault(); openMenu(event.clientX, event.clientY); });
@@ -450,7 +482,7 @@
   $('pet-size').addEventListener('input', event => { petScale = Number(event.target.value); $('pet-size-value').textContent = petScale + '%'; $('pet-wrap').style.setProperty('--pet-scale', petScale / 100); clampPet(); });
   $('pet-size').addEventListener('change', persist);
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { closeMenu(true); $('pet-wrap').classList.remove('show-tooltip'); }
+    if (event.key === 'Escape') { closeMenu(true); dismissPetTooltip(); }
     if (!$('context-menu').hidden && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
       event.preventDefault();
       const items = [...$('context-menu').querySelectorAll('button, input')].filter(item => !item.hidden && item.offsetParent !== null), index = items.indexOf(document.activeElement);
@@ -470,6 +502,7 @@
     desktop.onControl((action, value) => {
       if (action === 'page') setPage(value);
       if (action === 'visibility' && desktopPet) setView(value ? 'pet' : 'hidden');
+      if (action === 'hover' && desktopPet) setPetHover(value);
       if (action === 'bubbles' && desktopPet) {
         $('pet-wrap').dataset.bubbles = value.below ? 'below' : 'above';
         $('pet-wrap').style.setProperty('--bubble-shift', value.shift + 'px');

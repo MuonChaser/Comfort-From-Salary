@@ -8,6 +8,7 @@ const preload = path.join(__dirname, 'preload.cjs');
 let main, pet, tray, sizePanel, sizePanelReady, quitting = false, lastView = 'overview';
 let pinned = true, scale = 100, drag, bubblesBelow = false, bubbleShift = 0;
 let ignoresMouse;
+let pointerOverPet = false;
 const petWidth = 190;
 const petHeight = 212;
 const petInset = 8;
@@ -85,6 +86,10 @@ function updateMouseTarget() {
   const cursor = screen.getCursorScreenPoint();
   const overPet = cursor.x >= x - 1 && cursor.x <= x + width &&
     cursor.y >= y - 1 && cursor.y <= y + petWidth * scale / 100;
+  if (pointerOverPet !== overPet) {
+    pointerOverPet = overPet;
+    pet.webContents.send('cfs:control', 'hover', overPet);
+  }
   const ignore = !drag && !overPet;
   if (ignore === ignoresMouse) return;
   ignoresMouse = ignore;
@@ -268,7 +273,10 @@ async function start() {
     hasShadow: false, alwaysOnTop: pinned,
   });
   pet.on('show', () => pet.webContents.send('cfs:control', 'visibility', true));
-  pet.on('hide', () => pet.webContents.send('cfs:control', 'visibility', false));
+  pet.on('hide', () => {
+    pointerOverPet = false;
+    pet.webContents.send('cfs:control', 'visibility', false);
+  });
   const icon = nativeImage.createFromPath(path.join(__dirname, 'tray.png'));
   tray = new Tray(icon);
   tray.setToolTip('Comfort-From-Salary');

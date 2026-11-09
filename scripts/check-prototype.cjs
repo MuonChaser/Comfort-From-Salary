@@ -174,6 +174,14 @@ const screenshot = (page, name) => page.screenshot({ path: path.join(artifacts, 
     await screenshot(page, 'pet');
     const petBox = await page.locator('#pet-wrap').boundingBox();
     await page.screenshot({ path: path.join(artifacts, 'pet-detail.png'), clip: { x: petBox.x - 32, y: petBox.y - 205, width: 260, height: 425 } });
+    await page.locator('#pet-character').click();
+    await page.mouse.move(5, 5);
+    await page.locator('#pet-tooltip').waitFor({ state: 'hidden' });
+    assert.equal(await page.locator('#pet-earnings').isVisible(), true);
+    await page.locator('#pet-character').hover();
+    await page.locator('#pet-tooltip').waitFor({ state: 'visible' });
+    await page.keyboard.press('Escape');
+    await page.locator('#pet-tooltip').waitFor({ state: 'hidden' });
     for (const [state, visible] of [['lunch', false], ['after', false], ['rest', false], ['working', true]]) {
       await page.selectOption('#preview-state', state);
       assert.equal(await page.locator('#pet-wrap').getAttribute('data-state'), state);
@@ -186,6 +194,10 @@ const screenshot = (page, name) => page.screenshot({ path: path.join(artifacts, 
     await page.mouse.up();
     const after = await page.locator('#pet-wrap').boundingBox();
     assert.ok(Math.abs(after.x - before.x) > 50);
+    await page.locator('#pet-tooltip').waitFor({ state: 'hidden' });
+    await page.mouse.move(5, 5);
+    await page.locator('#pet-character').hover();
+    await page.locator('#pet-tooltip').waitFor({ state: 'visible' });
     await page.locator('#pet-character').click({ button: 'right' });
     await page.locator('#context-menu [data-action=pin]').click();
     assert.equal(await page.locator('#menu-pin').getAttribute('aria-checked'), 'true');
