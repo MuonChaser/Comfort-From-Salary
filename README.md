@@ -11,7 +11,7 @@ Windows x64 试用版支持桌宠悬浮、拖动、置顶、缩放和系统托�
 桌宠形象设计与动画制作 均由Codex协助完成
 ## Windows 11 试用版
 
-在 [v0.1.1 发布页](../../releases/tag/v0.1.1_Winx64) 的 Assets 区下载 Windows 11 x64 免安装包。
+在 [发布页](../../releases) 的 Assets 区下载 Windows 11 x64 免安装包。
 
 1. 解压 `Comfort-From-Salary-0.1.1-win-x64.zip`，在解压后的文件夹中双击 `Comfort-From-Salary.exe`。程序和同目录的文件一起运行。
 2. 在「薪资与作息」填写设置，点击「切换桌宠」。桌面版默认按本机时间计算。
