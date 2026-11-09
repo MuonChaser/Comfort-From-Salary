@@ -1,0 +1,118 @@
+html[data-desktop], html[data-desktop] body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+[data-desktop] .prototype-header,
+[data-desktop] .prototype-footer,
+[data-desktop] .wallpaper-mark,
+[data-desktop] .taskbar,
+[data-desktop] .desktop-hint,
+[data-desktop] .empty-state,
+[data-desktop] .resize-grip {
+  display: none;
+}
+
+[data-desktop] .desktop {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+[data-desktop] .desktop::before { display: none; }
+
+[data-desktop=main] .app-window {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  transform: none;
+  border-radius: 0;
+}
+
+[data-desktop=main] .titlebar { app-region: drag; -webkit-app-region: drag; }
+[data-desktop=main] .titlebar button { app-region: no-drag; -webkit-app-region: no-drag; }
+[data-desktop] .desktop-date-return { margin-left: 8px; }
+html:not([data-desktop]) .desktop-date-return { display: none; }
+
+[data-desktop=pet] .pet-wrap {
+  left: 50%;
+  top: auto;
+  bottom: 8px;
+  transform: translateX(-50%) scale(var(--pet-scale));
+  transform-origin: center bottom;
+}
+
+[data-desktop=pet] .pet-tooltip { width: 230px; }
+[data-desktop=pet] .toast { bottom: 20px; }
+
+[data-desktop=pet] .pet-tooltip,
+[data-desktop=pet] .pet-earnings {
+  left: calc(50% + var(--bubble-shift, 0px));
+}
+
+[data-desktop=pet] .pet-wrap[data-bubbles=below] {
+  top: 8px;
+  bottom: auto;
+  transform-origin: center top;
+}
+
+[data-desktop=pet] [data-bubbles=below] .pet-earnings {
+  top: 216px;
+  bottom: auto;
+}
+
+[data-desktop=pet] [data-bubbles=below] .pet-earnings::after {
+  top: -5px;
+  bottom: auto;
+  transform: rotate(225deg);
+}
+
+[data-desktop=pet] [data-bubbles=below] .pet-tooltip {
+  top: 290px;
+  bottom: auto;
+}
+
+[data-desktop=pet] [data-bubbles=below]:not([data-growing=true]) .pet-tooltip {
+  top: 216px;
+  bottom: auto;
+}
+
+[data-desktop=size] .app-window { display: none; }
+
+[data-desktop=size] .context-menu {
+  inset: 0;
+  width: 100%;
+  padding: 22px 18px;
+  border-radius: 0;
+}
+
+[data-desktop=size] .context-menu > :not(.pet-size-control):not(#size-panel-close) {
+  display: none;
+}
+
+[data-desktop=size] .pet-size-control {
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+[data-desktop=size] #size-panel-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 28px;
+  height: 26px;
+  justify-content: center;
+  padding: 0;
+}

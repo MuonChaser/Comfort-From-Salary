@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>月芽 · 上班中动画预览</title>
+  <link rel="stylesheet" href="./pet-animation.css"><link rel="stylesheet" href="./yueya-preview.css">
+  <link rel="stylesheet" href="./theme.css">
+  <script defer src="./yueya-working-assets.js"></script><script defer src="./pet-animation.js"></script><script defer src="./yueya-preview.js"></script>
+</head>
+<body data-animation="working">
+  <main class="animation-preview">
+    <header><div><p class="eyebrow">COMFORT-FROM-SALARY / YUEYA</p><h1>月芽，正在和工作较劲。</h1><p class="intro">上班中 · 烦躁工作</p></div><a href="./index.html">返回完整原型 ↗</a></header>
+    <section class="animation-stage" id="animation-stage" aria-label="月芽工作动画">
+      <span class="scene-badge" id="scene-badge">正在加载素材</span>
+      <div class="preview-actor"><div class="yueya-sprite" id="preview-sprite" role="img" aria-label="月芽坐在电脑桌前皱眉工作，头顶有红色生气符号"></div></div>
+      <p class="scene-caption" id="scene-caption" aria-live="polite">常驻循环：皱眉敲键盘，生气符号轻轻跳动</p>
+    </section>
+    <div class="animation-controls"><button class="primary" id="play-action" disabled>播放：红温 → 抬拳 → 砸桌 → 平复</button><button id="pause-animation" disabled>暂停</button><button id="toggle-background" aria-pressed="false">切换深色背景</button></div>
+    <div class="animation-options"><label><input type="checkbox" id="reduce-motion">减少动画</label><span>常驻循环约 3 秒；偶发动作约 2.6 秒，平时每隔 30～90 秒随机出现。</span></div>
+    <footer><span>首版关键帧动画 · 仅展示上班中状态</span><a href="./assets/yueya/working/working-demo.gif" download="月芽-上班中动画.gif">下载 GIF ↗</a><a href="./assets/yueya/working/working-demo.webp" download="月芽-上班中动画.webp">下载透明 WebP ↗</a></footer>
+  </main>
+</body>
+</html>

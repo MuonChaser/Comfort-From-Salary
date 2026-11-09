@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>Comfort-From-Salary · 交互原型</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./calendar.css">
+  <link rel="stylesheet" href="./pet-animation.css">
+  <link rel="stylesheet" href="./theme.css">
+  <link rel="stylesheet" href="./desktop.css">
+  <script defer src="./core.js"></script>
+  <script defer src="./yueya-assets.js"></script>
+  <script defer src="./yueya-working-assets.js"></script>
+  <script defer src="./yueya-lunch-assets.js"></script>
+  <script defer src="./yueya-after-assets.js"></script>
+  <script defer src="./yueya-rest-assets.js"></script>
+  <script defer src="./pet-animation.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3Z M9 20v-7h6v7"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+    <symbol id="i-pet" viewBox="0 0 24 24"><path d="M5 12V4l5 4h4l5-4v8a7 7 0 0 1-14 0Z M9 13h.01M15 13h.01M10 17h4"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="m8 3 8 0-1 6 4 4v2H5v-2l4-4Z M12 15v7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C8 2 2 7 5 15s17 5 15-11Z M6 18 16 8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10M6 5a9 9 0 1 0 12 0"/></symbol>
+  </defs></svg>
+  <header class="prototype-header">
+    <div><div class="eyebrow">COMFORT-FROM-SALARY <span>／ 交互原型 02</span></div><h1>让付出的时间，看得见。</h1></div>
+    <div class="preview-tools"><label for="preview-state">预览状态</label><select id="preview-state"><option value="working">计薪中</option><option value="before">未上班</option><option value="lunch">午休</option><option value="after">已下班</option><option value="rest">休息日</option><option value="selected" hidden>指定日期</option><option value="live">跟随本机时间</option></select><span class="demo-clock" id="demo-clock"></span></div>
+  </header>
+  <main class="desktop" id="desktop" aria-label="桌面交互预览">
+    <div class="wallpaper-mark" aria-hidden="true"><span>small moments,</span><span>steady comfort.</span></div>
+    <section class="app-window" id="app-window" aria-label="Comfort-From-Salary 主窗口">
+      <header class="titlebar" id="window-drag"><span class="titlebar-brand"><span class="brand-mark small"><svg><use href="#i-leaf"/></svg></span>Comfort-From-Salary <button class="text-button desktop-date-return" id="desktop-date-return" data-action="live" hidden>日期预览 · 返回本机时间</button></span><div class="window-controls"><button class="icon-button pin-button" data-action="pin" aria-label="窗口置顶" aria-pressed="false"><svg><use href="#i-pin"/></svg></button><button class="icon-button" data-action="pet" aria-label="切换桌宠"><svg><use href="#i-pet"/></svg></button><button class="icon-button" data-action="hide" aria-label="隐藏到托盘"><svg><use href="#i-minus"/></svg></button><button class="icon-button close-button" data-action="hide" aria-label="关闭窗口并隐藏到托盘"><svg><use href="#i-close"/></svg></button></div></header>
+      <div class="window-body">
+        <aside class="sidebar"><div class="sidebar-brand"><span class="brand-mark"><svg><use href="#i-leaf"/></svg></span><strong>Comfort<span>From Salary</span></strong></div><nav aria-label="主导航"><button class="nav-item active" data-page="overview" aria-label="收入概览"><svg><use href="#i-home"/></svg><span>收入概览</span></button><button class="nav-item" data-page="settings" aria-label="薪资与作息"><svg><use href="#i-settings"/></svg><span>薪资与作息</span></button></nav><button class="pet-entry" data-action="pet" aria-label="切换为桌宠"><svg><use href="#i-pet"/></svg><span>让桌宠陪着你</span><svg><use href="#i-arrow"/></svg></button><div class="sidebar-bottom"><span class="local-dot"></span>本地保存 · 无需联网</div></aside>
+        <div class="page-content">
+          <section id="overview-page" class="page">
+            <div class="page-heading"><div><p class="eyebrow" id="date-label"></p><h2>每一份付出，都在积累。</h2></div><span class="status-badge" id="main-status"><span></span><b>计薪中</b></span></div>
+            <div class="income-card"><div class="income-main"><span class="metric-label">本日已赚 <span class="estimate">估算</span></span><div class="hero-amount"><span>¥</span><strong id="today-earned">0.00</strong></div><p id="income-caption">正在按你的工作时间积累</p></div><div class="month-income"><span class="metric-label">本月已赚</span><strong id="month-earned">¥0.00</strong><span id="month-caption">按本月计划工作时间折算</span></div><div class="income-progress"><div class="progress-label"><span id="progress-copy">今日计薪进度</span><span id="progress-percent">0%</span></div><div class="progress-track" role="progressbar" aria-label="今日计薪进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div></div></div>
+            <div class="section-heading"><h3>你的时间，值得多少</h3><span>基础换算 · 日期调整另计</span></div>
+            <div class="salary-grid"><div class="salary-item"><span class="salary-label">月薪<span class="salary-suffix">· 基础薪资</span></span><strong id="rate-month">¥0.00</strong><small>依当月工作安排</small></div><div class="salary-item"><span class="salary-label">日薪<span class="salary-suffix">· 基础薪资</span></span><strong id="rate-day">¥0.00</strong><small>每个完整工作日</small></div><div class="salary-item"><span class="salary-label">时薪<span class="salary-suffix">· 基础薪资</span></span><strong id="rate-hour">¥0.00</strong><small>每个计薪小时</small></div><div class="salary-item rate-second"><span class="salary-label">秒薪<span class="salary-suffix">· 当前计薪速度</span><i class="live-dot"></i></span><strong id="rate-second">¥0.000000</strong><small id="rate-second-caption">每个计薪秒</small></div></div>
+            <div class="schedule-summary"><svg><use href="#i-settings"/></svg><div><strong id="schedule-label"></strong><span id="schedule-detail"></span></div><button class="text-button" data-page="settings">调整作息 <span>↗</span></button></div>
+            <footer class="overview-footer"><span><svg><use href="#i-info"/></svg>按计划工作时间估算，不代表实际到账</span><button class="primary-button" data-action="pet"><svg><use href="#i-pet"/></svg>切换桌宠</button></footer>
+          </section>
+          <section id="settings-page" class="page" hidden>
+            <div class="page-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h2>按你的节奏来。</h2></div><div class="settings-heading-actions"><button class="text-button" id="jump-calendar" type="button">本月日历 ↓</button><button class="text-button" data-page="overview">返回概览 ↗</button></div></div>
+            <form id="settings-form" novalidate>
+              <div class="settings-fields">
+              <fieldset><legend><span class="step-number">01</span>你的薪资</legend><div class="form-grid salary-fields"><label>输入依据<select id="salary-type" name="salaryType"><option value="monthly">月薪</option><option value="daily">日薪</option><option value="hourly">时薪</option></select></label><label>金额（人民币）<input id="salary-input" name="salary" type="number" min="0.01" max="1000000000" step="0.01" required inputmode="decimal"></label></div><p class="field-help">填写一种即可，月薪、日薪、时薪和秒薪将同时展示。</p></fieldset>
+              <fieldset><legend><span class="step-number">02</span>每周工作日</legend><div class="weekday-picker" id="weekday-picker"></div><p class="field-help">每周重复这套安排，节假日也遵循所选星期。</p></fieldset>
+              <fieldset><legend><span class="step-number">03</span>一天的作息</legend><div class="form-grid"><label>上班时间<input id="start-input" name="start" type="time" required></label><label>下班时间<input id="end-input" name="end" type="time" required></label></div><div class="lunch-toggles"><label class="check-label"><input id="lunch-enabled" name="lunchEnabled" type="checkbox">设置午休</label><label class="check-label" id="paid-lunch-label"><input id="lunch-paid" name="lunchPaid" type="checkbox">午休也计薪</label></div><div class="form-grid" id="lunch-fields"><label>午休开始<input id="lunch-start" name="lunchStart" type="time"></label><label>午休结束<input id="lunch-end" name="lunchEnd" type="time"></label></div></fieldset>
+              <fieldset id="calendar-section"><legend><span class="step-number">04</span>本月请假与调休/加班</legend>
+                <div class="calendar-layout"><div class="calendar-board">
+                <div class="calendar-heading"><div><strong id="calendar-month"></strong><span>点击日期，安排这个月的节奏</span></div><span class="calendar-count" id="calendar-count"></span></div>
+                <div class="calendar-weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+                <div class="month-calendar" id="month-calendar" role="group" aria-label="本月日期"></div>
+                <div class="calendar-legend"><span><i class="calendar-dot base-dot"></i>工作日</span><span><i class="calendar-dot unpaid-dot"></i>不带薪假</span><span><i class="calendar-dot paid-dot"></i>带薪假</span><span><i class="calendar-dot work-dot"></i>调休/加班</span><span><i class="calendar-dot custom-dot"></i>自定义薪资</span></div>
+                </div><div class="day-editor" id="day-editor"><div class="day-editor-heading"><strong id="selected-date"></strong><span id="day-base-label"></span></div>
+                  <div class="form-grid"><label>当天安排<select id="day-arrangement"><option value="default">按每周工作制</option><option value="leave-full">请假一天</option><option value="leave-half">请假半天</option><option value="work">调休/加班一天</option><option value="rest">调休休息一天</option></select></label><label id="day-pay-rule-field">计薪方式<select id="day-pay-rule"><option value="default">A · 按默认规则</option><option value="custom">B · 自定义当天薪资</option></select></label><label id="leave-pay-field">请假类型<select id="leave-pay"><option value="unpaid">不带薪假</option><option value="paid">带薪假</option></select></label><label id="leave-half-field">请假时段<select id="leave-half"><option value="first-half">前半班</option><option value="second-half">后半班</option></select></label><label id="custom-day-pay-field">当天总计薪金额（元）<input id="custom-day-pay" type="number" min="0" max="1000000000" step="0.01" inputmode="decimal"></label></div>
+                  <p class="field-help" id="day-effect"></p><p class="field-help" id="half-day-note" hidden>半天按标准计薪时长的 50% 划分，不一定以中午为界。</p>
+                  <div class="day-editor-actions"><span id="calendar-draft-note" role="status">调整将在保存设置后生效</span><button class="text-button" type="button" id="preview-selected-day">保存并预览当天 ↗</button></div>
+                </div>
+                </div>
+                <div class="calendar-summary" aria-live="polite"><span>本月预计收入（按当前草稿）</span><strong id="calendar-expected"></strong><span id="calendar-income-change"></span></div>
+                <p class="field-help calendar-rules">A 默认请假不计薪，可选带薪假；调休/加班按正常日薪计入。B 使用当天总薪资，按当天原计划计薪时段分摊，不作为额外奖金。未来调整只影响预计收入；跨午夜班次按开班日设置。</p>
+              </fieldset>
+              </div>
+              <div class="settings-save"><p id="form-error" role="alert" hidden></p><p class="save-note" id="settings-summary">保存后，本日和本月估算将按新设置重新计算。</p><div><button class="secondary-button" type="button" id="cancel-settings">取消</button><button class="primary-button" type="submit"><svg><use href="#i-check"/></svg>保存设置</button></div></div>
+            </form>
+          </section>
+        </div>
+      </div>
+      <div class="resize-grip" id="window-resize" aria-hidden="true"></div>
+    </section>
+    <div class="pet-wrap" id="pet-wrap" hidden>
+      <div class="pet-earnings" id="pet-earnings"><span>本日已赚</span><strong id="pet-today">¥0.00</strong></div>
+      <div class="pet-tooltip" id="pet-tooltip" role="tooltip"><div class="tooltip-heading"><span class="local-dot"></span>努力的每一刻，都算数。</div><div><span>本日已赚</span><strong id="hover-today">¥0.00</strong></div><div><span>本月已赚</span><strong id="hover-month">¥0.00</strong></div></div>
+      <button class="pet-character" id="pet-character" aria-label="桌宠，双击打开完整窗口，右键打开菜单" aria-describedby="pet-tooltip">
+        <span class="yueya-sprite" id="leave-sticker" hidden role="img" aria-label="写着查无此人的木牌，右下角有眨眼的月芽"></span>
+        <span class="yueya-sprite" id="rest-sprite" hidden role="img" aria-label="月芽戴着墨镜，开心地拿着相机"></span>
+        <span class="yueya-sprite" id="after-sprite" hidden role="img" aria-label="月芽下班后无精打采地横躺在沙发上"></span>
+        <span class="yueya-sprite" id="lunch-sprite" hidden role="img" aria-label="月芽拿着刀叉，开心地准备吃午饭"></span>
+        <span class="yueya-sprite" id="working-sprite" hidden role="img" aria-label="月芽坐在电脑桌前烦躁工作"></span>
+        <span class="yueya-sprite" id="commuter-sprite" hidden role="img" aria-label="月芽通勤中，疲惫地抓住地铁扶手"></span>
+        <svg class="pet-art" viewBox="0 0 220 210" role="img" aria-label="占位桌宠，正式形象待替换">
+          <ellipse class="pet-shadow" cx="110" cy="193" rx="53" ry="9"/>
+          <g class="pet-body"><path class="pet-arm left-arm" d="M63 122Q31 119 43 146Q54 154 70 143"/><path class="pet-arm right-arm" d="M157 122Q188 115 179 142Q169 153 151 142"/><ellipse class="pet-foot" cx="82" cy="180" rx="18" ry="10"/><ellipse class="pet-foot" cx="139" cy="180" rx="18" ry="10"/><path class="pet-main" d="M55 108Q53 50 109 48Q166 49 167 108L163 151Q158 180 110 181Q62 181 58 152Z"/><path class="pet-leaf" d="M108 50Q75 47 84 25Q106 25 111 46Q110 16 139 20Q140 43 113 50"/><ellipse class="pet-cheek" cx="77" cy="117" rx="10" ry="5"/><ellipse class="pet-cheek" cx="145" cy="117" rx="10" ry="5"/><g class="awake-eyes"><ellipse cx="88" cy="101" rx="4" ry="6"/><ellipse cx="133" cy="101" rx="4" ry="6"/></g><g class="sleep-eyes"><path d="m81 104 7 3 7-3m31 0 7 3 7-3"/></g><path class="pet-mouth" d="M104 116q7 8 14 0"/><path class="pet-scarf" d="M59 138q50 20 103-1l-2 14q-50 18-99 0Z M133 150l-2 24 16-4-5-21"/><g class="pet-work"><rect x="72" y="151" width="77" height="25" rx="5"/><path d="M83 159h55m-40 8h26"/></g><g class="pet-lunch"><path d="M81 151h61q-5 28-31 28t-30-28Z"/><path d="m111 145 20-25"/><path class="steam" d="M95 139q-6-7 0-14m14 14q-6-7 0-14"/></g><g class="pet-rest"><path d="M62 83q48-16 98 0M75 78l9-29q28-13 52 0l12 29"/></g><g class="pet-sleep"><text x="163" y="69">z</text><text x="183" y="47">z</text></g></g>
+        </svg>
+      </button>
+      <span class="pet-state-label" id="pet-state-label">计薪中</span>
+    </div>
+    <div class="desktop-hint" id="desktop-hint" hidden><span class="hint-dot"></span>拖动桌宠换个位置 · 双击打开窗口 · 右键查看更多</div>
+    <div class="empty-state" id="empty-state" hidden><span class="brand-mark"><svg><use href="#i-leaf"/></svg></span><h2 id="empty-title">已藏进托盘</h2><p id="empty-copy">点击底部的 Comfort 图标，随时回来。</p><button class="primary-button" id="relaunch">重新打开</button></div>
+    <div class="context-menu" id="context-menu" role="menu" hidden><button role="menuitem" data-action="overview"><svg><use href="#i-home"/></svg>打开完整窗口</button><button role="menuitem" data-action="settings"><svg><use href="#i-settings"/></svg>薪资与作息</button><button role="menuitem" data-action="commute" id="menu-commute" hidden><svg><use href="#i-pet"/></svg>播放通勤小动作</button><button role="menuitem" data-action="working-animation" id="menu-working" hidden><svg><use href="#i-pet"/></svg>播放砸桌小动作</button><button role="menuitem" data-action="lunch-animation" id="menu-lunch" hidden><svg><use href="#i-pet"/></svg>播放吃饭小动作</button><button role="menuitem" data-action="after-animation" id="menu-after" hidden><svg><use href="#i-pet"/></svg>播放翻身小动作</button><button role="menuitem" data-action="rest-animation" id="menu-rest" hidden><svg><use href="#i-pet"/></svg>播放落日合影</button><button role="menuitemcheckbox" data-action="pin" aria-checked="false" id="menu-pin"><svg><use href="#i-pin"/></svg><span>窗口置顶</span></button><button id="size-panel-close" type="button" aria-label="关闭大小调节" hidden><svg><use href="#i-close"/></svg></button><label class="pet-size-control">桌宠大小<input type="range" id="pet-size" min="50" max="125" step="1" value="100" aria-label="桌宠大小"><output id="pet-size-value">100%</output></label><hr><button role="menuitem" data-action="hide"><svg><use href="#i-minus"/></svg>隐藏到托盘</button><button role="menuitem" data-action="exit"><svg><use href="#i-power"/></svg>退出软件</button></div>
+    <footer class="taskbar"><span class="desktop-caption">桌面预览</span><div class="taskbar-center"><button class="tray-app" id="tray-app" aria-label="Comfort 托盘图标，点击恢复，右键打开菜单"><span class="brand-mark small"><svg><use href="#i-leaf"/></svg></span><span>Comfort</span><i></i></button></div><time id="tray-clock"></time></footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </main>
+  <footer class="prototype-footer"><span><i></i><a href="./yueya-before.html">月芽 · 未上班动画 ↗</a> · <a href="./yueya-working.html">上班中动画 ↗</a> · <a href="./yueya-lunch.html">午休动画 ↗</a> · <a href="./yueya-after.html">已下班动画 ↗</a> · <a href="./yueya-rest.html">休息日动画 ↗</a></span><span>置顶、托盘与退出在预览内模拟；尚未连接 Windows 桌面。</span></footer>
+</body>
+</html>

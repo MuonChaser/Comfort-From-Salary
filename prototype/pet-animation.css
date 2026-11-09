@@ -1,0 +1,10 @@
+.yueya-sprite{display:block;width:100%;height:100%;background-repeat:no-repeat;pointer-events:none}
+#leave-sticker {
+  background: url('./assets/yueya/leave/leave-sign.png') center bottom / 145% no-repeat;
+}
+.pet-wrap.has-yueya .pet-art{display:none}
+.pet-wrap.has-yueya .pet-character{border-radius:0}
+.prototype-footer{flex-wrap:wrap}
+.prototype-footer span:first-child{white-space:normal;flex-wrap:wrap}
+.prototype-footer a{color:#7e926b;text-decoration:none;border-bottom:1px solid #b9c7ac}
+.prototype-footer a:hover{color:#536d40}

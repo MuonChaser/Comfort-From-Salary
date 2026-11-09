@@ -1,0 +1,144 @@
+{
+  "character": "月芽",
+  "state": "lunch",
+  "version": 1,
+  "sheet": "assets/yueya/lunch/lunch-sheet-v2.png",
+  "columns": 4,
+  "rows": 4,
+  "frameSize": 512,
+  "idle": {
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      1
+    ],
+    "delays": [
+      500,
+      500,
+      500,
+      500,
+      500,
+      500
+    ]
+  },
+  "action": {
+    "frames": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "delays": [
+      220,
+      180,
+      240,
+      180,
+      240,
+      200,
+      320,
+      350,
+      380,
+      450,
+      350,
+      800
+    ]
+  },
+  "randomInterval": [
+    30000,
+    90000
+  ],
+  "anchorAlignment": [
+    {
+      "frame": 0,
+      "dx": -17,
+      "dy": -6
+    },
+    {
+      "frame": 1,
+      "dx": -3,
+      "dy": -6
+    },
+    {
+      "frame": 2,
+      "dx": 9,
+      "dy": -6
+    },
+    {
+      "frame": 3,
+      "dx": 21,
+      "dy": -6
+    },
+    {
+      "frame": 4,
+      "dx": -17,
+      "dy": 2
+    },
+    {
+      "frame": 5,
+      "dx": -5,
+      "dy": 2
+    },
+    {
+      "frame": 6,
+      "dx": 7,
+      "dy": 1
+    },
+    {
+      "frame": 7,
+      "dx": 18,
+      "dy": 2
+    },
+    {
+      "frame": 8,
+      "dx": -19,
+      "dy": 10
+    },
+    {
+      "frame": 9,
+      "dx": -6,
+      "dy": 10
+    },
+    {
+      "frame": 10,
+      "dx": 6,
+      "dy": 10
+    },
+    {
+      "frame": 11,
+      "dx": 18,
+      "dy": 10
+    },
+    {
+      "frame": 12,
+      "dx": -20,
+      "dy": -9
+    },
+    {
+      "frame": 13,
+      "dx": -6,
+      "dy": -9
+    },
+    {
+      "frame": 14,
+      "dx": 4,
+      "dy": -9
+    },
+    {
+      "frame": 15,
+      "dx": 17,
+      "dy": -9
+    }
+  ],
+  "note": "16 unique generated keyframes; four idle poses and twelve action poses. Preview artwork."
+}

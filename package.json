@@ -1,0 +1,17 @@
+{
+  "name": "comfort-from-salary",
+  "version": "0.1.1",
+  "private": true,
+  "productName": "Comfort-From-Salary",
+  "description": "Comfort-From-Salary Windows 11 桌宠与收入估算",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "desktop": "electron .",
+    "package:win": "node scripts/package-windows.cjs",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "devDependencies": {
+    "electron": "45.2.3"
+  }
+}

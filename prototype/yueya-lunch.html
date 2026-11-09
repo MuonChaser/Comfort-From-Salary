@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>月芽 · 午休动画预览</title>
+  <link rel="stylesheet" href="./pet-animation.css"><link rel="stylesheet" href="./yueya-preview.css">
+  <link rel="stylesheet" href="./theme.css">
+  <script defer src="./yueya-lunch-assets.js"></script><script defer src="./pet-animation.js"></script><script defer src="./yueya-preview.js"></script>
+</head>
+<body data-animation="lunch">
+  <main class="animation-preview">
+    <header><div><p class="eyebrow">COMFORT-FROM-SALARY / YUEYA</p><h1>月芽，午饭时间到了。</h1><p class="intro">午休 · 满足待餐</p></div><a href="./index.html">返回完整原型 ↗</a></header>
+    <section class="animation-stage" id="animation-stage" aria-label="月芽午休动画">
+      <span class="scene-badge" id="scene-badge">正在加载素材</span>
+      <div class="preview-actor"><div class="yueya-sprite" id="preview-sprite" role="img" aria-label="月芽左手拿叉，右手拿刀，准备享用午饭"></div></div>
+      <p class="scene-caption" id="scene-caption" aria-live="polite">常驻循环：开心地拿着刀叉，准备享用午饭</p>
+    </section>
+    <div class="animation-controls"><button class="primary" id="play-action" disabled>播放：大口吃饭 → 吃空餐盒 → 打饱嗝</button><button id="pause-animation" disabled>暂停</button><button id="toggle-background" aria-pressed="false">切换深色背景</button></div>
+    <div class="animation-options"><label><input type="checkbox" id="reduce-motion">减少动画</label><span>常驻循环约 3 秒；偶发动作约 3.9 秒，平时每隔 30～90 秒随机出现。</span></div>
+    <footer><span>首版关键帧动画 · 仅展示午休状态</span><a href="./assets/yueya/lunch/lunch-demo.gif" download="月芽-午休动画.gif">下载 GIF ↗</a><a href="./assets/yueya/lunch/lunch-demo.webp" download="月芽-午休动画.webp">下载透明 WebP ↗</a></footer>
+  </main>
+</body>
+</html>

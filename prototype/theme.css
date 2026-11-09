@@ -1,0 +1,180 @@
+/* Yueya's pale-blue palette, shared by the desktop and animation previews. */
+:root {
+  --ink: #294663;
+  --muted: #5e7890;
+  --accent: #487da5;
+  --accent-soft: #e7f3fc;
+  --paper: #ffffff;
+  --page: #f5f9fd;
+  --surface: #f5fafe;
+  --sidebar: #eff7fd;
+  --line: #dce9f3;
+  --line-strong: #bed9ed;
+  --selected: #deeffc;
+  --primary: #3e79a5;
+  --primary-hover: #32688f;
+  --quiet: #7b93a8;
+  --focus: #90c5eb;
+  --shadow: 0 25px 75px #2d5a8120, 0 3px 12px #2d5a810a;
+  color: var(--ink);
+}
+
+body { background: var(--page); }
+button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline-color: var(--focus); }
+.eyebrow { color: var(--accent); }
+.eyebrow span, .page-heading .eyebrow, .demo-clock { color: var(--quiet); }
+.preview-tools label { color: var(--muted); }
+.preview-tools select { background: var(--paper); border-color: var(--line); }
+.desktop {
+  border-color: #d2e4f3;
+  background: radial-gradient(ellipse at 8% 20%, #ddecfb 0, transparent 46%),
+              radial-gradient(ellipse at 90% 90%, #e3edfc 0, transparent 45%), #edf5fc;
+}
+.desktop::before { background-image: radial-gradient(#679cc312 .8px, transparent .8px); }
+.wallpaper-mark { color: #7ca5ca2b; }
+.titlebar { background: var(--surface); }
+.titlebar-brand { color: #6788a3; }
+.brand-mark { background: #dfeffb; color: #5584ac; }
+.icon-button { color: #7791a8; }
+.icon-button:hover { background: #e6f1fa; }
+.icon-button[aria-pressed=true] { color: #376c96; background: var(--selected); }
+.close-button:hover { background: #b76168; color: #fff; }
+.sidebar { background: var(--sidebar); }
+.sidebar-brand strong span, .sidebar-bottom { color: var(--quiet); }
+.nav-item { color: #6d88a1; }
+.nav-item:hover, .pet-entry:hover { background: #e3f1fc; }
+.nav-item.active { background: var(--selected); color: #3c6e96; }
+.pet-entry { border-color: var(--line); background: #f8fcff; color: #5f86a6; }
+.local-dot { background: #7db3db; }
+.page-content, .settings-fields { scrollbar-color: #c9deef transparent; }
+.status-badge { background: #e9f4fd; border-color: #d6e9f8; color: #527fa6; }
+.status-badge[data-state=after], .status-badge[data-state=rest], .status-badge[data-state=before] {
+  background: #f0f6fc; border-color: #e0ebf5; color: #738ba2;
+}
+.income-card { background: linear-gradient(115deg, #e7f3fe, #f2f8ff); }
+.income-card::after { border-color: #c1daf166; box-shadow: 0 0 0 20px #d3e6fa4d, 0 0 0 40px #deedfc4d; }
+.metric-label { color: #5e83a2; }
+.estimate { border-color: #bfd8ec; color: #7599b6; }
+.hero-amount { color: #315f87; }
+.income-main p, .month-income>span:last-child { color: #7895af; }
+.month-income { border-color: #cfe2f2; }
+.progress-label { color: #7091ad; }
+.progress-track { background: #d4e6f5; }
+.progress-track>div { background: #84b7de; }
+.section-heading>span { color: var(--quiet); }
+.salary-item { background: #f7fbff; border-color: #e0ecf6; }
+.salary-item>span, .salary-item small { color: #7291ab; }
+.salary-item.rate-second { background: #e9f4fe; border-color: #cfe4f6; }
+.rate-second strong { color: #4f87b4; }
+.live-dot { background: #80b8e1; }
+.schedule-summary>svg { color: #7b9bb6; }
+.schedule-summary div>span, .overview-footer>span { color: #7b93a8; }
+.text-button { color: #638bad; }
+.text-button:hover { color: #345f83; }
+.primary-button { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 2px 3px #37698d1a; }
+.primary-button:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+.secondary-button { background: var(--paper); border-color: var(--line); color: #6b8ba5; }
+.secondary-button:hover { background: #eff7fd; }
+.resize-grip { background: repeating-linear-gradient(135deg, transparent 0, transparent 3px, #a8c6dd 3px, #a8c6dd 4px); }
+
+/* Settings use the same blue surfaces and native control accent. */
+.step-number { background: #e9f3fc; color: #7495b0; }
+.form-grid>label, .check-label { color: #6b8aa4; }
+input[type=number], input[type=time], form select { background: var(--paper); border-color: #cfe1ef; color: #456b8d; }
+.field-help, .save-note { color: #7a92a7; }
+.weekday-label span { background: var(--paper); border-color: var(--line); color: #7e97ac; }
+.weekday-label input:checked+span { background: #e1f0fc; border-color: #abcfe9; color: #4a7da5; }
+.weekday-label input:focus-visible+span { outline-color: var(--focus); }
+input[type=checkbox], input[type=range] { accent-color: #5a97c5; }
+
+/* Pet bubbles and preview-only desktop chrome. Original Yueya artwork is untouched. */
+.pet-shadow { fill: #547d9f24; }
+.pet-main { fill: #edf7ff; stroke: #9fc4df; }
+.pet-arm { fill: #e2f0fc; stroke: #9fc4df; }
+.pet-foot { fill: #a9c8df; }
+.pet-leaf { fill: #90bee1; stroke: #6594bb; }
+.awake-eyes { fill: #456888; }
+.sleep-eyes, .pet-mouth { stroke: #557899; }
+.pet-scarf { fill: #8db6d7; }
+.pet-work rect { fill: #bfd8ec; stroke: #7da5c6; }
+.pet-work path { stroke: #8eb5d3; }
+.pet-sleep { fill: #7fa2bd; }
+.pet-earnings { background: var(--paper); border-color: #cee3f3; box-shadow: 0 6px 20px #4c85b516; }
+.pet-earnings::after { background: var(--paper); border-color: #cee3f3; }
+.pet-earnings>span { color: #829db4; }
+.pet-earnings strong { color: #4b83ae; }
+.pet-state-label { background: #ffffffb3; color: #6b92b0; }
+.pet-tooltip { background: var(--paper); border-color: #d4e5f3; box-shadow: 0 10px 30px #4b83b31c; }
+.pet-tooltip>div { color: #7e97ae; }
+.pet-tooltip strong { color: #456e92; }
+.pet-tooltip .tooltip-heading { color: #7f99b0; border-color: #e4eef7; }
+.desktop-hint { color: #7c98af; }
+.hint-dot { background: #88b5d7; }
+.empty-state h2 { color: #6b93b3; }
+.empty-state p { color: #7e9ab1; }
+.context-menu { background: #fbfdff; border-color: #d2e4f2; box-shadow: 0 10px 35px #3d709926; }
+.context-menu>button { color: #6486a3; }
+.context-menu>button:hover { background: #eaf4fc; }
+.context-menu hr { border-color: #e2edf6; }
+.context-menu [aria-checked=true]::after { color: #4b86b3; }
+.pet-size-control { color: #7e98ac; }
+.taskbar { background: #f8fcffb8; }
+.desktop-caption, #tray-clock { color: #7f98ae; }
+.tray-app { background: #ffffffad; border-color: #cddfed99; color: #7292ae; }
+.tray-app:hover { background: var(--paper); }
+.tray-app i { background: #83b2d7; }
+.toast { background: #487caa; color: #fff; box-shadow: 0 5px 20px #44759e24; }
+.prototype-footer { color: #829bb0; }
+.prototype-footer i { background: #8db9db; }
+.prototype-footer a { color: #5988af; border-color: #a6c7e1; }
+.prototype-footer a:hover { color: #35678e; }
+
+/* Calendar semantic colors stay distinct, with blue as the ordinary workday. */
+.calendar-heading strong, .day-editor-heading strong { color: #4f7fa5; }
+.calendar-heading div>span, .calendar-weekdays, .calendar-legend { color: #7b98b0; }
+.calendar-count { background: #e7f2fc; color: #6c94b5; }
+.calendar-day { background: #f1f8fe; border-color: #d8e8f5; }
+.calendar-day>span { color: #547fa1; }
+.calendar-day small { color: #7a9ab3; }
+.calendar-day[data-kind=off], .calendar-day[data-kind=rest] { background: #f7fafc; border-color: #e4edf4; }
+.calendar-day[data-kind=off]>span, .calendar-day[data-kind=rest]>span { color: #8da4b8; }
+.calendar-day[data-kind=off] small, .calendar-day[data-kind=rest] small { color: #9aaebf; }
+.calendar-day[data-kind=paid] { background: #ebf1fc; border-color: #d2def1; }
+.calendar-day[data-kind=paid]>span, .calendar-day[data-kind=paid] small { color: #6d8bb2; }
+.calendar-day[data-kind=work] { background: #e6f4fd; border-color: #c1e0f3; }
+.calendar-day[data-kind=work]>span, .calendar-day[data-kind=work] small { color: #4c89ac; }
+.calendar-day[aria-current=date]::after { background: #7da9cc; }
+.calendar-day.selected { outline-color: #75abd3; }
+.base-dot { background: #a8c9e3; }
+.paid-dot { background: #9db6dc; }
+.work-dot { background: #7bb9dd; }
+.rest-dot { background: #b7cad9; }
+.day-editor { background: #fbfdff; border-color: #d4e5f3; }
+.day-editor-heading>span, .day-editor-actions>span { color: #819bb0; }
+.day-editor-actions { border-color: #e2edf6; }
+.calendar-summary { background: #eaf4fd; }
+.calendar-summary>span:first-child { color: #6d95b6; }
+.calendar-summary strong { color: #4f83ad; }
+.calendar-summary>span:last-child { color: #7b99b2; }
+
+/* Independent animation preview shares Yueya's cool-blue environment. */
+a { color: #678fae; }
+a:hover { color: #386b95; }
+.intro { color: #829bb1; }
+.animation-stage {
+  background: radial-gradient(ellipse at 20% 15%, #ddecfb, transparent 65%), #edf5fd;
+  border-color: #cee2f2;
+}
+.animation-stage::before { background-image: radial-gradient(#6d9ec419 .75px, transparent .75px); }
+.animation-stage.dark { background: radial-gradient(ellipse at 20% 15%, #304e69, transparent 65%), #1d3047; border-color: #365471; }
+.scene-badge { background: #f8fcffbd; border-color: #c6dff1; color: #7094b1; }
+.dark .scene-badge { background: #29445d; border-color: #4a6a87; color: #b4cfe4; }
+.scene-caption { color: #6f91ad; }
+.dark .scene-caption { color: #adc7dc; }
+.animation-controls button { background: var(--paper); border-color: var(--line); color: #668ba9; }
+.animation-controls button:hover { background: #e9f4fd; }
+.animation-controls .primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.animation-controls .primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+.animation-options { color: #7d98ad; }
+.animation-options input { accent-color: #5a97c5; }
+.animation-preview>footer { border-color: var(--line); color: #8ca2b5; }
