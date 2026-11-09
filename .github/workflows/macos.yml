@@ -1,0 +1,62 @@
+name: macOS desktop
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            arch: arm64
+            macho: arm64
+          - runner: macos-15-intel
+            arch: x64
+            macho: x86_64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run package:mac
+      - name: Verify and launch the packaged app
+        env:
+          ARCH: ${{ matrix.arch }}
+          MACHO: ${{ matrix.macho }}
+        run: |
+          ditto -x -k dist/*-mac-"$ARCH".zip "$RUNNER_TEMP/cfs-smoke"
+          app="$RUNNER_TEMP/cfs-smoke/Comfort-From-Salary.app"
+          binary="$app/Contents/MacOS/Comfort-From-Salary"
+          lipo -verify_arch "$MACHO" "$binary"
+          codesign --verify --deep --strict "$app"
+          log="$RUNNER_TEMP/cfs-electron.log"
+          "$binary" --remote-debugging-port=9222 --user-data-dir="$RUNNER_TEMP/cfs-profile" >"$log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if ! kill -0 "$pid" 2>/dev/null; then break; fi
+            if curl -fs http://127.0.0.1:9222/json/list | jq -e '
+              map(select(.type == "page") | .url) |
+              index("cfs://app/index.html?desktop=main") != null and
+              index("cfs://app/index.html?desktop=pet") != null
+            ' >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat "$log"
+          exit 1
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Comfort-From-Salary-mac-${{ matrix.arch }}
+          path: dist/*-mac-${{ matrix.arch }}.zip
+          if-no-files-found: error
